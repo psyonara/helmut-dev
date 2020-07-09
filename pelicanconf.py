@@ -7,7 +7,7 @@ AUTHOR = "Helmut Irle"
 SITENAME = "Helmut.dev"
 SITETITLE = "Helmut.dev"
 SITESUBTITLE = "Better code"
-SITEURL = "https://helmut.dev"
+SITEURL = "https://www.helmut.dev"
 SITELOGO = "/images/me.jpg"
 
 PATH = "content"
