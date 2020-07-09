@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://helmut.dev/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://helmut.dev/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://helmut.dev/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://helmut.dev/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://helmut.dev/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://helmut.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Helmut.dev Atom">
+
+
+
+
+
+<meta name="author" content="Helmut Irle" />
+<meta name="description" content="When updating a dictionary, no one would object to this: ages[&#34;Pete&#34;] = 42 But what about this? ages[&#34;Tom&#34;] = 29 ages[&#34;Linda&#34;] = 37 ages[&#34;Pam&#34;] = 62 ages[&#34;Coraline&#34;] = 21 Still fine, right? There is another way of writing this, using the .update() method. ages.update( { &#34;Tom&#34;: 29, &#34;Linda&#34;: 37, &#34;Pam …" />
+<meta name="keywords" content="">
+
+
+<meta property="og:site_name" content="Helmut.dev"/>
+<meta property="og:title" content="Faster updating of dictionaries"/>
+<meta property="og:description" content="When updating a dictionary, no one would object to this: ages[&#34;Pete&#34;] = 42 But what about this? ages[&#34;Tom&#34;] = 29 ages[&#34;Linda&#34;] = 37 ages[&#34;Pam&#34;] = 62 ages[&#34;Coraline&#34;] = 21 Still fine, right? There is another way of writing this, using the .update() method. ages.update( { &#34;Tom&#34;: 29, &#34;Linda&#34;: 37, &#34;Pam …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://helmut.dev/faster-updating-of-dictionaries.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-07-09 17:18:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://helmut.dev/author/helmut-irle.html">
+<meta property="article:section" content="Better Python"/>
+<meta property="og:image" content="/images/me.jpg">
+
+  <title>Helmut.dev &ndash; Faster updating of dictionaries</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="https://helmut.dev">
+        <img src="/images/me.jpg" alt="Helmut.dev" title="Helmut.dev">
+      </a>
+
+      <h1>
+        <a href="https://helmut.dev">Helmut.dev</a>
+      </h1>
+
+<p>Better code</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="https://helmut.dev/pages/about-me.html#about-me">
+                  About Me
+                </a>
+              </li>
+
+            <li>
+              <a target="_self" href="https://sequelsermon.com" >Sequel Sermon</a>
+            </li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://www.github.com/psyonara" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://www.twitter.com/psyonara" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://helmut.dev">Home</a>
+
+      <a href="/category/better-python.html">Better Python</a>
+
+      <a href="https://helmut.dev/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="faster-updating-of-dictionaries">Faster updating of dictionaries</h1>
+    <p>
+      Posted on Thu 09 July 2020 in <a href="https://helmut.dev/category/better-python.html">Better Python</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>When updating a dictionary, no one would object to this:</p>
+<div class="highlight"><pre><span></span><span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Pete&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+</pre></div>
+
+
+<p>But what about this?</p>
+<div class="highlight"><pre><span></span><span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Tom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">29</span>
+<span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Linda&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">37</span>
+<span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Pam&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">62</span>
+<span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Coraline&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">21</span>
+</pre></div>
+
+
+<p>Still fine, right? There is another way of writing this, using the <code>.update()</code> method.</p>
+<div class="highlight"><pre><span></span><span class="n">ages</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;Tom&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+        <span class="s2">&quot;Linda&quot;</span><span class="p">:</span> <span class="mi">37</span><span class="p">,</span>
+        <span class="s2">&quot;Pam&quot;</span><span class="p">:</span> <span class="mi">62</span><span class="p">,</span>
+        <span class="s2">&quot;Coraline&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>Which one do you prefer? Would you say it's a matter of preference? I always preferred using the <code>.update()</code> method when there were at least 3 updates being done. But one day I wondered about the performance of each method. Let's see if one is slower than the other.</p>
+<p>Using Python's <code>timeit</code>, we run the following code to test our first method. This updates the dictionary three times.</p>
+<div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="p">{};</span> <span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Tom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">29</span><span class="p">;</span> <span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Linda&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">37</span><span class="p">;</span> <span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Pam&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">62</span>
+</pre></div>
+
+
+<p>Then, using the same method, we test <code>.update()</code>.</p>
+<div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="p">{};</span> <span class="n">ages</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;Tom&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span> <span class="s2">&quot;Linda&quot;</span><span class="p">:</span> <span class="mi">37</span><span class="p">,</span> <span class="s2">&quot;Pam&quot;</span><span class="p">:</span> <span class="mi">62</span><span class="p">})</span>
+</pre></div>
+
+
+<p>The results?</p>
+<p>Straight assignment: <em>225 nsec per loop</em></p>
+<p>Using <code>.update()</code>: <em>522 nsec per loop</em></p>
+<p>And the pattern stays linear with more keys.</p>
+<p>So we see that straight assignment is about twice as fast. Does that mean we never use <code>.update()</code>? No. Like so many other things, it depends on your specific case.</p>
+<h4>The Case for Assignment</h4>
+<p>If you're updating a few keys, and your new data is not already gathered in a second dictionary, it probably makes sense to just use normal assignment.</p>
+<h4>The Case for Update</h4>
+<p>If you've got new data in a second dictionary (either a few items or many), and you'd like to update the first dictionary with these items, I would use the <code>.update()</code> method. It makes for cleaner code.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Helmut.dev 2020</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Helmut.dev ",
+  "url" : "https://helmut.dev",
+  "image": "/images/me.jpg",
+  "description": ""
+}
+</script>
+
+
+</body>
+</html>
