@@ -48,3 +48,5 @@ RELATIVE_URLS = True
 PYGMENTS_STYLE = "monokai"
 COPYRIGHT_NAME = "Helmut.dev"
 COPYRIGHT_YEAR = datetime.now().year
+
+GOOGLE_ANALYTICS = "UA-172353205-1"
