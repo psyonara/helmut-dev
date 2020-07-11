@@ -45,6 +45,23 @@ DEFAULT_PAGINATION = 5
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
+PLUGIN_PATHS = ["plugins"]
+PLUGINS = ["sitemap"]
+
+SITEMAP = {
+    "format": "xml",
+    "priorities": {
+        "articles": 0.7,
+        "pages": 0.5,
+        "indexes": 0.6,
+    },
+    "changefreqs": {
+        "articles": "monthly",
+        "pages": "monthly",
+        "indexes": "weekly",
+    },
+}
+
 PYGMENTS_STYLE = "monokai"
 COPYRIGHT_NAME = "Helmut.dev"
 COPYRIGHT_YEAR = datetime.now().year
