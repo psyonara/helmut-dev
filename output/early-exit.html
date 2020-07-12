@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://www.helmut.dev/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://www.helmut.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Helmut.dev Atom">
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-172353205-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Helmut Irle" />
+<meta name="description" content="You will have definitely come across the following pattern often: if post_data: thing = post_data.get(&#34;thing&#34;) if thing is not None: setting = get_user_setting(user, thing) if setting is not None: permission = get_user_permission(user) if permission is True: if user.is_superuser: return DataPoint.objects.all() elif user.is_staff: return DataPoint.objects …" />
+<meta name="keywords" content="">
+
+
+<meta property="og:site_name" content="Helmut.dev"/>
+<meta property="og:title" content="Early Exit"/>
+<meta property="og:description" content="You will have definitely come across the following pattern often: if post_data: thing = post_data.get(&#34;thing&#34;) if thing is not None: setting = get_user_setting(user, thing) if setting is not None: permission = get_user_permission(user) if permission is True: if user.is_superuser: return DataPoint.objects.all() elif user.is_staff: return DataPoint.objects …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://www.helmut.dev/early-exit.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-07-12 07:46:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://www.helmut.dev/author/helmut-irle.html">
+<meta property="article:section" content="Better Python"/>
+<meta property="og:image" content="/images/me.jpg">
+
+  <title>Helmut.dev &ndash; Early Exit</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="https://www.helmut.dev">
+        <img src="/images/me.jpg" alt="Helmut.dev" title="Helmut.dev">
+      </a>
+
+      <h1>
+        <a href="https://www.helmut.dev">Helmut.dev</a>
+      </h1>
+
+<p>Better code</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="https://www.helmut.dev/pages/about-me.html#about-me">
+                  About Me
+                </a>
+              </li>
+
+            <li>
+              <a target="_self" href="https://sequelsermon.com" >Sequel Sermon</a>
+            </li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://www.github.com/psyonara" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://www.twitter.com/psyonara" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://www.helmut.dev">Home</a>
+
+      <a href="/category/better-python.html">Better Python</a>
+
+      <a href="https://www.helmut.dev/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="early-exit">Early Exit</h1>
+    <p>
+      Posted on Sun 12 July 2020 in <a href="https://www.helmut.dev/category/better-python.html">Better Python</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p><img alt="Photo" src="https://www.helmut.dev/early-exit.jpg"></p>
+<p>You will have definitely come across the following pattern often:</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">post_data</span><span class="p">:</span>
+    <span class="n">thing</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;thing&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">thing</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">setting</span> <span class="o">=</span> <span class="n">get_user_setting</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">thing</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">setting</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">permission</span> <span class="o">=</span> <span class="n">get_user_permission</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">permission</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_superuser</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+                <span class="k">elif</span> <span class="n">user</span><span class="o">.</span><span class="n">is_staff</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">thing</span><span class="o">=</span><span class="n">thing</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;Permission denied&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Setting not found&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Thing not specified&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;No data posted&quot;</span>
+</pre></div>
+
+
+<p>What is good about the code above? It follows the thought process that most developers would have: which conditions must be met for me to execute the core logic of this feature? So I check each of those conditions and proceed if it is met. Then, in the middle of the code block, I have my core logic bundled up nicely. And at the end I deal with the cases where the conditions were not met.</p>
+<p>But are there any downsides?</p>
+<ol>
+<li>
+<p>The condition checks are quite disjointed. If you  want to see what happens when a condition is not met, you have to carefully follow the indentation down to where the corresponding <code>else</code> is. This is not ideal, but often accepted by a lot of developers.</p>
+</li>
+<li>
+<p>The indentation can become very acute if there are many layers of conditions.</p>
+</li>
+</ol>
+<p>Is there a better way? Yes, there is: the early exit. Instead of following the thought process of "Which conditions must be met?", we rather ask "Which conditions can I eliminate right off the bat?" Here's how we would rewrite the code above:</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">post_data</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;No data posted&quot;</span>
+
+<span class="n">thing</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;thing&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">thing</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;Thing not specified&quot;</span>
+
+<span class="n">setting</span> <span class="o">=</span> <span class="n">get_user_settig</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">thing</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">setting</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;Setting not found&quot;</span>
+
+<span class="n">permission</span> <span class="o">=</span> <span class="n">get_user_permission</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">permission</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;Permission denied&quot;</span>
+
+<span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_superuser</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_staff</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+
+<span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">thing</span><span class="o">=</span><span class="n">thing</span><span class="p">)</span>        
+</pre></div>
+
+
+<p>For each condition that is not met, we return immediately, since no further processing is necessary. And then at the end we have our core logic bundled up again.</p>
+<p>This does a few things for us.</p>
+<ol>
+<li>
+<p>It still keeps the core logic in one place.</p>
+</li>
+<li>
+<p>The conditions are also bundled up with their corresponding logic.</p>
+</li>
+<li>
+<p>We don't have the indentation problem any more.</p>
+</li>
+<li>
+<p>This may be just me, but I find the refactored code easier to read.</p>
+</li>
+</ol>
+<p>There is one caveat to this pattern: it mostly makes sense if you return something when a conditions is not met. If your application logic needs to <em>not</em> return anything, but for example append an error message to a list instead (and then continue), the above might have to be structured differently.</p>
+<p>But you'll find tons of places where this pattern is applicable, and if it makes sense in your scenario, go ahead and use it liberally. It's awesome.</p>
+<p>(Code above can be found on <a href="https://gist.github.com/psyonara/3cf53bc7f16e71030b5ad190214002d7">Github</a>)</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Helmut.dev 2020</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Helmut.dev ",
+  "url" : "https://www.helmut.dev",
+  "image": "/images/me.jpg",
+  "description": ""
+}
+</script>
+
+
+</body>
+</html>

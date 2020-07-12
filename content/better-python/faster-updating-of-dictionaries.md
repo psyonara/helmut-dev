@@ -2,6 +2,8 @@ Title: Faster updating of dictionaries
 Date: 2020-07-09 17:18
 Category: Better Python
 
+![Photo]({attach}/images/faster-updating-of-dictionaries.jpg)
+
 When updating a dictionary, no one would object to this:
 
 ```py
