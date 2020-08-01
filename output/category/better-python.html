@@ -102,6 +102,7 @@
       <a href="https://www.helmut.dev">Home</a>
 
       <a href="/category/better-python.html">Better Python</a>
+      <a href="/category/better-django.html">Better Django</a>
 
       <a href="https://www.helmut.dev/feeds/all.atom.xml">Atom</a>
 
@@ -131,7 +132,21 @@
                 <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_superuser</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
                 <span class="k">elif</span> <span class="n">user</span><span class="o">.</span><span class="n">is_staff</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects …</span></pre></div>
+                    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">thing</span><span class="o">=</span><span class="n">thing</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;Permission denied&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Setting not found&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Thing not specified&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;No data posted&quot;</span>
+</pre></div>
+
+
+<p>What is good about the code above? It follows the thought process that most developers would have: which conditions …</p>
         <br>
         <a class="btn"
            href="https://www.helmut.dev/early-exit.html#early-exit">
@@ -169,7 +184,14 @@
     <span class="p">{</span>
         <span class="s2">&quot;Tom&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
         <span class="s2">&quot;Linda&quot;</span><span class="p">:</span> <span class="mi">37</span><span class="p">,</span>
-        <span class="s2">&quot;Pam …</span></pre></div>
+        <span class="s2">&quot;Pam&quot;</span><span class="p">:</span> <span class="mi">62</span><span class="p">,</span>
+        <span class="s2">&quot;Coraline&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>Which one do you prefer? Would you say it's a matter of preference? I always preferred using the <code>.update()</code> method when there were at least 3 updates being done. But one day I wondered about the performance of each method. Let's see if one is slower than …</p>
         <br>
         <a class="btn"
            href="https://www.helmut.dev/faster-updating-of-dictionaries.html#faster-updating-of-dictionaries">

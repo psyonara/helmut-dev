@@ -102,6 +102,7 @@
       <a href="https://www.helmut.dev">Home</a>
 
       <a href="/category/better-python.html">Better Python</a>
+      <a href="/category/better-django.html">Better Django</a>
 
       <a href="https://www.helmut.dev/feeds/all.atom.xml">Atom</a>
 
@@ -109,6 +110,34 @@
 
 
 
+<article>
+  <header>
+    <h2><a href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">Speed up bulk-exists check with python sets</a></h2>
+    <p>
+      Posted on Sat 01 August 2020 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
+
+
+    </p>
+  </header>
+  <div>
+      <p><img alt="image" src="https://www.helmut.dev/bulk-exists-check.jpg"></p>
+<p>The <code>.exists()</code> function of Django's ORM is very useful. However, if you need to do this in bulk (think hundreds of thousands or more), this becomes a strain on your database. Let's say you are fetching records from an external system, and if the record doesn't exist locally, you need to do something:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">external_records</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">external_id</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="c1"># Do something</span>
+</pre></div>
+
+
+<p>If you are working with a large quantity of records, this will flood your DB with queries. Instead, you could first pull all <code>external_id</code> values from the DB:</p>
+<div class="highlight"><pre><span></span><span class="n">existing_ids</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all …</span></pre></div>
+        <br>
+        <a class="btn"
+           href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">
+          Continue reading
+        </a>
+  </div>
+  <hr />
+</article>
 <article>
   <header>
     <h2><a href="https://www.helmut.dev/early-exit.html#early-exit">Early Exit</a></h2>
@@ -131,7 +160,21 @@
                 <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_superuser</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
                 <span class="k">elif</span> <span class="n">user</span><span class="o">.</span><span class="n">is_staff</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects …</span></pre></div>
+                    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">thing</span><span class="o">=</span><span class="n">thing</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;Permission denied&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Setting not found&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Thing not specified&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;No data posted&quot;</span>
+</pre></div>
+
+
+<p>What is good about the code above? It follows the thought process that most developers would have: which conditions …</p>
         <br>
         <a class="btn"
            href="https://www.helmut.dev/early-exit.html#early-exit">
@@ -169,7 +212,14 @@
     <span class="p">{</span>
         <span class="s2">&quot;Tom&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
         <span class="s2">&quot;Linda&quot;</span><span class="p">:</span> <span class="mi">37</span><span class="p">,</span>
-        <span class="s2">&quot;Pam …</span></pre></div>
+        <span class="s2">&quot;Pam&quot;</span><span class="p">:</span> <span class="mi">62</span><span class="p">,</span>
+        <span class="s2">&quot;Coraline&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>Which one do you prefer? Would you say it's a matter of preference? I always preferred using the <code>.update()</code> method when there were at least 3 updates being done. But one day I wondered about the performance of each method. Let's see if one is slower than …</p>
         <br>
         <a class="btn"
            href="https://www.helmut.dev/faster-updating-of-dictionaries.html#faster-updating-of-dictionaries">

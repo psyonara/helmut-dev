@@ -27,6 +27,7 @@ AUTHOR_FEED_RSS = None
 MAIN_MENU = True
 MENUITEMS = (
     ("Better Python", "/category/better-python.html"),
+    ("Better Django", "/category/better-django.html"),
 )
 
 # Blogroll
@@ -41,6 +42,7 @@ SOCIAL = (
 )
 
 DEFAULT_PAGINATION = 5
+SUMMARY_MAX_LENGTH = 100
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True

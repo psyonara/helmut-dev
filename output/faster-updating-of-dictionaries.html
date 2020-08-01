@@ -39,13 +39,13 @@
 <!-- End Google Analytics -->
 
 <meta name="author" content="Helmut Irle" />
-<meta name="description" content="When updating a dictionary, no one would object to this: ages[&#34;Pete&#34;] = 42 But what about this? ages[&#34;Tom&#34;] = 29 ages[&#34;Linda&#34;] = 37 ages[&#34;Pam&#34;] = 62 ages[&#34;Coraline&#34;] = 21 Still fine, right? There is another way of writing this, using the .update() method. ages.update( { &#34;Tom&#34;: 29, &#34;Linda&#34;: 37, &#34;Pam …" />
+<meta name="description" content="When updating a dictionary, no one would object to this: ages[&#34;Pete&#34;] = 42 But what about this? ages[&#34;Tom&#34;] = 29 ages[&#34;Linda&#34;] = 37 ages[&#34;Pam&#34;] = 62 ages[&#34;Coraline&#34;] = 21 Still fine, right? There is another way of writing this, using the .update() method. ages.update( { &#34;Tom&#34;: 29, &#34;Linda&#34;: 37, &#34;Pam&#34;: 62, &#34;Coraline&#34;: 21, } ) Which one do you prefer? Would you say it&#39;s a matter of preference? I always preferred using the .update() method when there were at least 3 updates being done. But one day I wondered about the performance of each method. Let&#39;s see if one is slower than …" />
 <meta name="keywords" content="">
 
 
 <meta property="og:site_name" content="Helmut.dev"/>
 <meta property="og:title" content="Faster updating of dictionaries"/>
-<meta property="og:description" content="When updating a dictionary, no one would object to this: ages[&#34;Pete&#34;] = 42 But what about this? ages[&#34;Tom&#34;] = 29 ages[&#34;Linda&#34;] = 37 ages[&#34;Pam&#34;] = 62 ages[&#34;Coraline&#34;] = 21 Still fine, right? There is another way of writing this, using the .update() method. ages.update( { &#34;Tom&#34;: 29, &#34;Linda&#34;: 37, &#34;Pam …"/>
+<meta property="og:description" content="When updating a dictionary, no one would object to this: ages[&#34;Pete&#34;] = 42 But what about this? ages[&#34;Tom&#34;] = 29 ages[&#34;Linda&#34;] = 37 ages[&#34;Pam&#34;] = 62 ages[&#34;Coraline&#34;] = 21 Still fine, right? There is another way of writing this, using the .update() method. ages.update( { &#34;Tom&#34;: 29, &#34;Linda&#34;: 37, &#34;Pam&#34;: 62, &#34;Coraline&#34;: 21, } ) Which one do you prefer? Would you say it&#39;s a matter of preference? I always preferred using the .update() method when there were at least 3 updates being done. But one day I wondered about the performance of each method. Let&#39;s see if one is slower than …"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://www.helmut.dev/faster-updating-of-dictionaries.html"/>
 <meta property="og:type" content="article"/>
@@ -109,6 +109,7 @@
       <a href="https://www.helmut.dev">Home</a>
 
       <a href="/category/better-python.html">Better Python</a>
+      <a href="/category/better-django.html">Better Django</a>
 
       <a href="https://www.helmut.dev/feeds/all.atom.xml">Atom</a>
 

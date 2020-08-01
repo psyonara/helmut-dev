@@ -39,13 +39,13 @@
 <!-- End Google Analytics -->
 
 <meta name="author" content="Helmut Irle" />
-<meta name="description" content="You will have definitely come across the following pattern often: if post_data: thing = post_data.get(&#34;thing&#34;) if thing is not None: setting = get_user_setting(user, thing) if setting is not None: permission = get_user_permission(user) if permission is True: if user.is_superuser: return DataPoint.objects.all() elif user.is_staff: return DataPoint.objects …" />
+<meta name="description" content="You will have definitely come across the following pattern often: if post_data: thing = post_data.get(&#34;thing&#34;) if thing is not None: setting = get_user_setting(user, thing) if setting is not None: permission = get_user_permission(user) if permission is True: if user.is_superuser: return DataPoint.objects.all() elif user.is_staff: return DataPoint.objects.filter(user=user) else: return DataPoint.objects.filter(user=user, thing=thing) else: return &#34;Permission denied&#34; else: return &#34;Setting not found&#34; else: return &#34;Thing not specified&#34; else: return &#34;No data posted&#34; What is good about the code above? It follows the thought process that most developers would have: which conditions …" />
 <meta name="keywords" content="">
 
 
 <meta property="og:site_name" content="Helmut.dev"/>
 <meta property="og:title" content="Early Exit"/>
-<meta property="og:description" content="You will have definitely come across the following pattern often: if post_data: thing = post_data.get(&#34;thing&#34;) if thing is not None: setting = get_user_setting(user, thing) if setting is not None: permission = get_user_permission(user) if permission is True: if user.is_superuser: return DataPoint.objects.all() elif user.is_staff: return DataPoint.objects …"/>
+<meta property="og:description" content="You will have definitely come across the following pattern often: if post_data: thing = post_data.get(&#34;thing&#34;) if thing is not None: setting = get_user_setting(user, thing) if setting is not None: permission = get_user_permission(user) if permission is True: if user.is_superuser: return DataPoint.objects.all() elif user.is_staff: return DataPoint.objects.filter(user=user) else: return DataPoint.objects.filter(user=user, thing=thing) else: return &#34;Permission denied&#34; else: return &#34;Setting not found&#34; else: return &#34;Thing not specified&#34; else: return &#34;No data posted&#34; What is good about the code above? It follows the thought process that most developers would have: which conditions …"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="https://www.helmut.dev/early-exit.html"/>
 <meta property="og:type" content="article"/>
@@ -109,6 +109,7 @@
       <a href="https://www.helmut.dev">Home</a>
 
       <a href="/category/better-python.html">Better Python</a>
+      <a href="/category/better-django.html">Better Django</a>
 
       <a href="https://www.helmut.dev/feeds/all.atom.xml">Atom</a>
 
