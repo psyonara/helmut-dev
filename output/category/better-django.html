@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://www.helmut.dev/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://www.helmut.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Helmut.dev Atom">
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-172353205-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+    <meta name="author" content="Helmut Irle" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Helmut.dev"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Helmut.dev"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://www.helmut.dev"/>
+<meta property="og:image" content="/images/me.jpg">
+
+  <title>Helmut.dev &ndash; Category Better Django</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="https://www.helmut.dev">
+        <img src="/images/me.jpg" alt="Helmut.dev" title="Helmut.dev">
+      </a>
+
+      <h1>
+        <a href="https://www.helmut.dev">Helmut.dev</a>
+      </h1>
+
+<p>Better code</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="https://www.helmut.dev/pages/about-me.html#about-me">
+                  About Me
+                </a>
+              </li>
+
+            <li>
+              <a target="_self" href="https://sequelsermon.com" >Sequel Sermon</a>
+            </li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://www.github.com/psyonara" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://www.twitter.com/psyonara" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://www.helmut.dev">Home</a>
+
+      <a href="/category/better-python.html">Better Python</a>
+      <a href="/category/better-django.html">Better Django</a>
+
+      <a href="https://www.helmut.dev/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+
+
+<article>
+  <header>
+    <h2><a href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">Speed up bulk-exists check with python sets</a></h2>
+    <p>
+      Posted on Sat 01 August 2020 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
+
+
+    </p>
+  </header>
+  <div>
+      <p><img alt="image" src="https://www.helmut.dev/bulk-exists-check.jpg"></p>
+<p>The <code>.exists()</code> function of Django's ORM is very useful. However, if you need to do this in bulk (think hundreds of thousands or more), this becomes a strain on your database. Let's say you are fetching records from an external system, and if the record doesn't exist locally, you need to do something:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">external_records</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">external_id</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="c1"># Do something</span>
+</pre></div>
+
+
+<p>If you are working with a large quantity of records, this will flood your DB with queries. Instead, you could first pull all <code>external_id</code> values from the DB:</p>
+<div class="highlight"><pre><span></span><span class="n">existing_ids</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all …</span></pre></div>
+        <br>
+        <a class="btn"
+           href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">
+          Continue reading
+        </a>
+  </div>
+</article>
+
+  <div class="pagination">
+  </div>
+
+
+
+    <footer>
+<p>&copy; Helmut.dev 2020</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Helmut.dev ",
+  "url" : "https://www.helmut.dev",
+  "image": "/images/me.jpg",
+  "description": ""
+}
+</script>
+
+
+</body>
+</html>
