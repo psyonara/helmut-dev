@@ -28,6 +28,7 @@ MAIN_MENU = True
 MENUITEMS = (
     ("Better Python", "/category/better-python.html"),
     ("Better Django", "/category/better-django.html"),
+    ("Misc", "/category/misc.html")
 )
 
 # Blogroll

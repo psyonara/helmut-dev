@@ -10,19 +10,18 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
 
 
     <link id="pygments-light-theme" rel="stylesheet" type="text/css"
-          href="https://www.helmut.dev/theme/pygments/monokai.min.css">
+          href="../theme/pygments/monokai.min.css">
 
 
-  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/solid.css">
 
 
-    <link href="https://www.helmut.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Helmut.dev Atom">
 
 
 
@@ -45,7 +44,7 @@
 <meta property="og:title" content="Helmut.dev"/>
 <meta property="og:description" content=""/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://www.helmut.dev"/>
+<meta property="og:url" content=".."/>
 <meta property="og:image" content="/images/me.jpg">
 
   <title>Helmut.dev &ndash; Category Better Django</title>
@@ -54,12 +53,12 @@
 <body class="light-theme">
   <aside>
     <div>
-      <a href="https://www.helmut.dev">
+      <a href="..">
         <img src="/images/me.jpg" alt="Helmut.dev" title="Helmut.dev">
       </a>
 
       <h1>
-        <a href="https://www.helmut.dev">Helmut.dev</a>
+        <a href="..">Helmut.dev</a>
       </h1>
 
 <p>Better code</p>
@@ -70,7 +69,7 @@
 
               <li>
                 <a target="_self"
-                   href="https://www.helmut.dev/pages/about-me.html#about-me">
+                   href="../pages/about-me.html#about-me">
                   About Me
                 </a>
               </li>
@@ -99,12 +98,12 @@
   <main>
 
     <nav>
-      <a href="https://www.helmut.dev">Home</a>
+      <a href="..">Home</a>
 
       <a href="/category/better-python.html">Better Python</a>
       <a href="/category/better-django.html">Better Django</a>
+      <a href="/category/misc.html">Misc</a>
 
-      <a href="https://www.helmut.dev/feeds/all.atom.xml">Atom</a>
 
     </nav>
 
@@ -112,15 +111,15 @@
 
 <article>
   <header>
-    <h2><a href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">Speed up bulk-exists check with python sets</a></h2>
+    <h2><a href="../speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">Speed up bulk-exists check with python sets</a></h2>
     <p>
-      Posted on Sat 01 August 2020 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
+      Posted on Sat 01 August 2020 in <a href="../category/better-django.html">Better Django</a>
 
 
     </p>
   </header>
   <div>
-      <p><img alt="image" src="https://www.helmut.dev/bulk-exists-check.jpg"></p>
+      <p><img alt="image" src="../bulk-exists-check.jpg"></p>
 <p>The <code>.exists()</code> function of Django's ORM is very useful. However, if you need to do this in bulk (think hundreds of thousands or more), this becomes a strain on your database. Let's say you are fetching records from an external system, and if the record doesn't exist locally, you need to do something:</p>
 <div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">external_records</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">external_id</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
@@ -132,7 +131,7 @@
 <div class="highlight"><pre><span></span><span class="n">existing_ids</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all …</span></pre></div>
         <br>
         <a class="btn"
-           href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">
+           href="../speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">
           Continue reading
         </a>
   </div>
@@ -144,7 +143,7 @@
 
 
     <footer>
-<p>&copy; Helmut.dev 2020</p>
+<p>&copy; Helmut.dev 2021</p>
 <p>
 Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
 </p>    </footer>
@@ -158,7 +157,7 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Helmut.dev ",
-  "url" : "https://www.helmut.dev",
+  "url" : "..",
   "image": "/images/me.jpg",
   "description": ""
 }
