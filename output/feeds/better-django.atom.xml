@@ -1,5 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Helmut.dev - Better Django</title><link href="https://www.helmut.dev/" rel="alternate"></link><link href="https://www.helmut.dev/feeds/better-django.atom.xml" rel="self"></link><id>https://www.helmut.dev/</id><updated>2020-08-01T08:00:00+02:00</updated><subtitle>Better code</subtitle><entry><title>Speed up bulk-exists check with python sets</title><link href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html" rel="alternate"></link><published>2020-08-01T08:00:00+02:00</published><updated>2020-08-01T08:00:00+02:00</updated><author><name>Helmut Irle</name></author><id>tag:www.helmut.dev,2020-08-01:/speed-up-bulk-exists-check-with-python-sets.html</id><summary type="html">&lt;p&gt;&lt;img alt="image" src="https://www.helmut.dev/bulk-exists-check.jpg"&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Helmut.dev - Better Django</title><link href="https://www.helmut.dev/" rel="alternate"></link><link href="https://www.helmut.dev/feeds/better-django.atom.xml" rel="self"></link><id>https://www.helmut.dev/</id><updated>2021-02-12T07:10:00+02:00</updated><subtitle>Better code</subtitle><entry><title>Learn the subtle differences between Save and Update in Django</title><link href="https://www.helmut.dev/learn-the-subtle-differences-between-save-and-update-in-django.html" rel="alternate"></link><published>2021-02-12T07:10:00+02:00</published><updated>2021-02-12T07:10:00+02:00</updated><author><name>Helmut Irle</name></author><id>tag:www.helmut.dev,2021-02-12:/learn-the-subtle-differences-between-save-and-update-in-django.html</id><summary type="html">&lt;p&gt;To save data in Django, you normally use &lt;a href="[Model instance reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/instances/#saving-objects)"&gt;.save()&lt;/a&gt; on a model instance. However the ORM also provides a &lt;a href="[QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/querysets/#update)"&gt;.update()&lt;/a&gt; method on queryset objects. So which one should you use? Let's take a look at each, and then decide which one to use in which situations.&lt;/p&gt;
+&lt;h3&gt;Save&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;.save()&lt;/code&gt; method is used to write a model instance to the database. It can be an existing record or even a new one. For an existing record, Django will run a SQL UPDATE  statement on the database. For a new record, Django will run an INSERT. &lt;a href="[Model instance reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/instances/#how-django-knows-to-update-vs-insert)"&gt;Before Django 3.0&lt;/a&gt;, it would …&lt;/p&gt;</summary><content type="html">&lt;p&gt;To save data in Django, you normally use &lt;a href="[Model instance reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/instances/#saving-objects)"&gt;.save()&lt;/a&gt; on a model instance. However the ORM also provides a &lt;a href="[QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/querysets/#update)"&gt;.update()&lt;/a&gt; method on queryset objects. So which one should you use? Let's take a look at each, and then decide which one to use in which situations.&lt;/p&gt;
+&lt;h3&gt;Save&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;.save()&lt;/code&gt; method is used to write a model instance to the database. It can be an existing record or even a new one. For an existing record, Django will run a SQL UPDATE  statement on the database. For a new record, Django will run an INSERT. &lt;a href="[Model instance reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/instances/#how-django-knows-to-update-vs-insert)"&gt;Before Django 3.0&lt;/a&gt;, it would also do a SELECT before the INSERT, to make sure that the primary key doesn't exist (if one was given), and do an UPDATE instead if it found something.&lt;/p&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;new_book&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Book&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;How to code&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Mike Lambda&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;price&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;new_book&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;book&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Book&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Debugging like a pro&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;book&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;price&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;
+&lt;span class="n"&gt;book&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;When updating an existing record, Django will update every field. That means, if you changed only one field on the model instance (like the price in the example above), all the fields will be updated (with the values staying the same). This is rather inefficient, right? Especially if you model has many, many fields. And there's another problem. If there's a significant amount of time in between the fetching of the record and the saving of it, it is possible that another request will have updated one of the fields on that record, and your model instance still has the old value. If you call &lt;code&gt;.save()&lt;/code&gt; now, it will overwrite the new value that someone else saved. These two problems can be prevented by using the &lt;a href="[Model instance reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/instances/#specifying-which-fields-to-save)"&gt;update_fields&lt;/a&gt; parameter. It expects a list of fields (as strings) that you want to save. So if you have only a few fields to save, use this parameter to prevent such data overwrite problems. The UPDATE that is run against the database then only updates those fields that you have specified.&lt;/p&gt;
+&lt;p&gt;In the example above, it would change to:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;book&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;update_fields&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;price&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;When to use Save&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;You are creating a new record (an alternative is using the &lt;a href="[QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/querysets/#create)"&gt;.create()&lt;/a&gt; method).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You have a model instance already, and you need to change some field values.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You've overridden the &lt;code&gt;save&lt;/code&gt; method to include some custom model logic.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You've defined &lt;a href="[Signals | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/signals/#pre-save)"&gt;pre_save&lt;/a&gt; and &lt;a href="[Signals | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/signals/#post-save)"&gt;post_save&lt;/a&gt; signals for that model.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The changes you need to make are dynamic, based on current field values (e.g. incrementing a value - see the example above).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You want to update fields from a related model (like a &lt;a href="[Model field reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/fields/#foreignkey)"&gt;ForeignKey&lt;/a&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Update&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;.update()&lt;/code&gt; method is available on each queryset object of the ORM. Using it will typically look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Book&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;price__lt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;price&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This would update the price of all books that are below a certain price. While this is for a range of records, it could also be used as in our first example, to update a single record:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Book&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Debugging like a pro&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;price&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You'll notice that this doesn't increment the price like it does in the first &lt;code&gt;save&lt;/code&gt; example. You would need to use an &lt;a href="[Query Expressions | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/expressions/#f-expressions)"&gt;F expression&lt;/a&gt; for that, but that's beyond the scope for now.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Update&lt;/code&gt; cannot be used to create a new record, like &lt;code&gt;save&lt;/code&gt; can.&lt;/p&gt;
+&lt;h4&gt;When to use Update&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;You are updating fields of one or many records&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You don't need to re-use a model instance after updating&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You don't need your overridden &lt;code&gt;save&lt;/code&gt; method or any &lt;code&gt;pre_save&lt;/code&gt; or &lt;code&gt;post_save&lt;/code&gt; signals to run&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You know what your new field values must be without having retrieved the record(s)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Summary&lt;/h3&gt;
+&lt;p&gt;If you need to update field values, without any other model logic needing to be run, and you know what the changes will be without fetching the record(s) first, use &lt;code&gt;update&lt;/code&gt;. The SQL that is run against the database will be more efficient. However, if you need to, or have already, loaded the record from the database, and you possibly need the change to be dynamic based on existing data, or there's attached model logic that needs to run, use &lt;code&gt;save&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I hope this has been helpful to you. If you have any questions or comments, please don't hesitate to reach out to me. I'd be glad to have a chat.&lt;/p&gt;</content><category term="Better Django"></category></entry><entry><title>Speed up bulk-exists check with python sets</title><link href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html" rel="alternate"></link><published>2020-08-01T08:00:00+02:00</published><updated>2020-08-01T08:00:00+02:00</updated><author><name>Helmut Irle</name></author><id>tag:www.helmut.dev,2020-08-01:/speed-up-bulk-exists-check-with-python-sets.html</id><summary type="html">&lt;p&gt;&lt;img alt="image" src="https://www.helmut.dev/bulk-exists-check.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;.exists()&lt;/code&gt; function of Django's ORM is very useful. However, if you need to do this in bulk (think hundreds of thousands or more), this becomes a strain on your database. Let's say you are fetching records from an external system, and if the record doesn't exist locally, you need to do something:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;external_records&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;Data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;external_id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exists&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
