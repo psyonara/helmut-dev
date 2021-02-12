@@ -1,5 +1,5 @@
 Title: Learn the subtle differences between Save and Update in Django
-Date: 2021-02-09 07:10
+Date: 2021-02-12 07:10
 Category: Better Django
 
 To save data in Django, you normally use [.save()]([Model instance reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/instances/#saving-objects)) on a model instance. However the ORM also provides a [.update()]([QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/querysets/#update)) method on queryset objects. So which one should you use? Let's take a look at each, and then decide which one to use in which situations.
