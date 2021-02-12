@@ -113,6 +113,27 @@
 
 <article>
   <header>
+    <h2><a href="https://www.helmut.dev/learn-the-subtle-differences-between-save-and-update-in-django.html#learn-the-subtle-differences-between-save-and-update-in-django">Learn the subtle differences between Save and Update in Django</a></h2>
+    <p>
+      Posted on Tue 09 February 2021 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
+
+
+    </p>
+  </header>
+  <div>
+      <p>To save data in Django, you normally use <a href="[Model instance reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/instances/#saving-objects)">.save()</a> on a model instance. However the ORM also provides a <a href="[QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/querysets/#update)">.update()</a> method on queryset objects. So which one should you use? Let's take a look at each, and then decide which one to use in which situations.</p>
+<h3>Save</h3>
+<p>The <code>.save()</code> method is used to write a model instance to the database. It can be an existing record or even a new one. For an existing record, Django will run a SQL UPDATE  statement on the database. For a new record, Django will run an INSERT. <a href="[Model instance reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/instances/#how-django-knows-to-update-vs-insert)">Before Django 3.0</a>, it would …</p>
+        <br>
+        <a class="btn"
+           href="https://www.helmut.dev/learn-the-subtle-differences-between-save-and-update-in-django.html#learn-the-subtle-differences-between-save-and-update-in-django">
+          Continue reading
+        </a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">Speed up bulk-exists check with python sets</a></h2>
     <p>
       Posted on Sat 01 August 2020 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>

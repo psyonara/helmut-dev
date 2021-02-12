@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://www.helmut.dev/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://www.helmut.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Helmut.dev Atom">
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-172353205-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Helmut Irle" />
+<meta name="description" content="To save data in Django, you normally use .save() on a model instance. However the ORM also provides a .update() method on queryset objects. So which one should you use? Let&#39;s take a look at each, and then decide which one to use in which situations. Save The .save() method is used to write a model instance to the database. It can be an existing record or even a new one. For an existing record, Django will run a SQL UPDATE statement on the database. For a new record, Django will run an INSERT. Before Django 3.0, it would …" />
+<meta name="keywords" content="">
+
+
+<meta property="og:site_name" content="Helmut.dev"/>
+<meta property="og:title" content="Learn the subtle differences between Save and Update in Django"/>
+<meta property="og:description" content="To save data in Django, you normally use .save() on a model instance. However the ORM also provides a .update() method on queryset objects. So which one should you use? Let&#39;s take a look at each, and then decide which one to use in which situations. Save The .save() method is used to write a model instance to the database. It can be an existing record or even a new one. For an existing record, Django will run a SQL UPDATE statement on the database. For a new record, Django will run an INSERT. Before Django 3.0, it would …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://www.helmut.dev/learn-the-subtle-differences-between-save-and-update-in-django.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-02-09 07:10:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://www.helmut.dev/author/helmut-irle.html">
+<meta property="article:section" content="Better Django"/>
+<meta property="og:image" content="/images/me.jpg">
+
+  <title>Helmut.dev &ndash; Learn the subtle differences between Save and Update in Django</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="https://www.helmut.dev">
+        <img src="/images/me.jpg" alt="Helmut.dev" title="Helmut.dev">
+      </a>
+
+      <h1>
+        <a href="https://www.helmut.dev">Helmut.dev</a>
+      </h1>
+
+<p>Better code</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="https://www.helmut.dev/pages/about-me.html#about-me">
+                  About Me
+                </a>
+              </li>
+
+            <li>
+              <a target="_self" href="https://sequelsermon.com" >Sequel Sermon</a>
+            </li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://www.github.com/psyonara" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://www.twitter.com/psyonara" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://www.helmut.dev">Home</a>
+
+      <a href="/category/better-python.html">Better Python</a>
+      <a href="/category/better-django.html">Better Django</a>
+      <a href="/category/misc.html">Misc</a>
+
+      <a href="https://www.helmut.dev/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="learn-the-subtle-differences-between-save-and-update-in-django">Learn the subtle differences between Save and Update in Django</h1>
+    <p>
+      Posted on Tue 09 February 2021 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>To save data in Django, you normally use <a href="[Model instance reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/instances/#saving-objects)">.save()</a> on a model instance. However the ORM also provides a <a href="[QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/querysets/#update)">.update()</a> method on queryset objects. So which one should you use? Let's take a look at each, and then decide which one to use in which situations.</p>
+<h3>Save</h3>
+<p>The <code>.save()</code> method is used to write a model instance to the database. It can be an existing record or even a new one. For an existing record, Django will run a SQL UPDATE  statement on the database. For a new record, Django will run an INSERT. <a href="[Model instance reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/instances/#how-django-knows-to-update-vs-insert)">Before Django 3.0</a>, it would also do a SELECT before the INSERT, to make sure that the primary key doesn't exist (if one was given), and do an UPDATE instead if it found something.</p>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><span class="n">new_book</span> <span class="o">=</span> <span class="n">Book</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;How to code&quot;</span><span class="p">,</span> <span class="n">author</span><span class="o">=</span><span class="s2">&quot;Mike Lambda&quot;</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">new_book</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Debugging like a pro&quot;</span><span class="p">)</span>
+<span class="n">book</span><span class="o">.</span><span class="n">price</span> <span class="o">+=</span> <span class="mi">5</span>
+<span class="n">book</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+
+
+<p>When updating an existing record, Django will update every field. That means, if you changed only one field on the model instance (like the price in the example above), all the fields will be updated (with the values staying the same). This is rather inefficient, right? Especially if you model has many, many fields. And there's another problem. If there's a significant amount of time in between the fetching of the record and the saving of it, it is possible that another request will have updated one of the fields on that record, and your model instance still has the old value. If you call <code>.save()</code> now, it will overwrite the new value that someone else saved. These two problems can be prevented by using the <a href="[Model instance reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/instances/#specifying-which-fields-to-save)">update_fields</a> parameter. It expects a list of fields (as strings) that you want to save. So if you have only a few fields to save, use this parameter to prevent such data overwrite problems. The UPDATE that is run against the database then only updates those fields that you have specified.</p>
+<p>In the example above, it would change to:</p>
+<div class="highlight"><pre><span></span><span class="n">book</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">update_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">])</span>
+</pre></div>
+
+
+<h4>When to use Save</h4>
+<ul>
+<li>
+<p>You are creating a new record (an alternative is using the <a href="[QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/querysets/#create)">.create()</a> method).</p>
+</li>
+<li>
+<p>You have a model instance already, and you need to change some field values.</p>
+</li>
+<li>
+<p>You've overridden the <code>save</code> method to include some custom model logic.</p>
+</li>
+<li>
+<p>You've defined <a href="[Signals | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/signals/#pre-save)">pre_save</a> and <a href="[Signals | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/signals/#post-save)">post_save</a> signals for that model.</p>
+</li>
+<li>
+<p>The changes you need to make are dynamic, based on current field values (e.g. incrementing a value - see the example above).</p>
+</li>
+<li>
+<p>You want to update fields from a related model (like a <a href="[Model field reference | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/fields/#foreignkey)">ForeignKey</a>).</p>
+</li>
+</ul>
+<h3>Update</h3>
+<p>The <code>.update()</code> method is available on each queryset object of the ORM. Using it will typically look like this:</p>
+<div class="highlight"><pre><span></span><span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">price__lt</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">price</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This would update the price of all books that are below a certain price. While this is for a range of records, it could also be used as in our first example, to update a single record:</p>
+<div class="highlight"><pre><span></span><span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Debugging like a pro&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">price</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+
+
+<p>You'll notice that this doesn't increment the price like it does in the first <code>save</code> example. You would need to use an <a href="[Query Expressions | Django documentation | Django](https://docs.djangoproject.com/en/3.1/ref/models/expressions/#f-expressions)">F expression</a> for that, but that's beyond the scope for now.</p>
+<p><code>Update</code> cannot be used to create a new record, like <code>save</code> can.</p>
+<h4>When to use Update</h4>
+<ul>
+<li>
+<p>You are updating fields of one or many records</p>
+</li>
+<li>
+<p>You don't need to re-use a model instance after updating</p>
+</li>
+<li>
+<p>You don't need your overridden <code>save</code> method or any <code>pre_save</code> or <code>post_save</code> signals to run</p>
+</li>
+<li>
+<p>You know what your new field values must be without having retrieved the record(s)</p>
+</li>
+</ul>
+<h3>Summary</h3>
+<p>If you need to update field values, without any other model logic needing to be run, and you know what the changes will be without fetching the record(s) first, use <code>update</code>. The SQL that is run against the database will be more efficient. However, if you need to, or have already, loaded the record from the database, and you possibly need the change to be dynamic based on existing data, or there's attached model logic that needs to run, use <code>save</code>.</p>
+<p>I hope this has been helpful to you. If you have any questions or comments, please don't hesitate to reach out to me. I'd be glad to have a chat.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Helmut.dev 2021</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Helmut.dev ",
+  "url" : "https://www.helmut.dev",
+  "image": "/images/me.jpg",
+  "description": ""
+}
+</script>
+
+
+</body>
+</html>
