@@ -130,20 +130,18 @@
   <div>
     <p><img alt="Photo" src="https://www.helmut.dev/faster-updating-of-dictionaries.jpg"></p>
 <p>When updating a dictionary, no one would object to this:</p>
-<div class="highlight"><pre><span></span><span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Pete&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Pete&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+</code></pre></div>
 
 <p>But what about this?</p>
-<div class="highlight"><pre><span></span><span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Tom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">29</span>
+<div class="highlight"><pre><span></span><code><span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Tom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">29</span>
 <span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Linda&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">37</span>
 <span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Pam&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">62</span>
 <span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Coraline&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">21</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Still fine, right? There is another way of writing this, using the <code>.update()</code> method.</p>
-<div class="highlight"><pre><span></span><span class="n">ages</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="n">ages</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;Tom&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
         <span class="s2">&quot;Linda&quot;</span><span class="p">:</span> <span class="mi">37</span><span class="p">,</span>
@@ -151,19 +149,16 @@
         <span class="s2">&quot;Coraline&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Which one do you prefer? Would you say it's a matter of preference? I always preferred using the <code>.update()</code> method when there were at least 3 updates being done. But one day I wondered about the performance of each method. Let's see if one is slower than the other.</p>
 <p>Using Python's <code>timeit</code>, we run the following code to test our first method. This updates the dictionary three times.</p>
-<div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="p">{};</span> <span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Tom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">29</span><span class="p">;</span> <span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Linda&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">37</span><span class="p">;</span> <span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Pam&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">62</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">ages</span> <span class="o">=</span> <span class="p">{};</span> <span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Tom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">29</span><span class="p">;</span> <span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Linda&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">37</span><span class="p">;</span> <span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Pam&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">62</span>
+</code></pre></div>
 
 <p>Then, using the same method, we test <code>.update()</code>.</p>
-<div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="p">{};</span> <span class="n">ages</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;Tom&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span> <span class="s2">&quot;Linda&quot;</span><span class="p">:</span> <span class="mi">37</span><span class="p">,</span> <span class="s2">&quot;Pam&quot;</span><span class="p">:</span> <span class="mi">62</span><span class="p">})</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">ages</span> <span class="o">=</span> <span class="p">{};</span> <span class="n">ages</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;Tom&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span> <span class="s2">&quot;Linda&quot;</span><span class="p">:</span> <span class="mi">37</span><span class="p">,</span> <span class="s2">&quot;Pam&quot;</span><span class="p">:</span> <span class="mi">62</span><span class="p">})</span>
+</code></pre></div>
 
 <p>The results?</p>
 <p>Straight assignment: <em>225 nsec per loop</em></p>

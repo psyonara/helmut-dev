@@ -130,7 +130,7 @@
   <div>
     <p><img alt="Photo" src="https://www.helmut.dev/early-exit.jpg"></p>
 <p>You will have definitely come across the following pattern often:</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">post_data</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">post_data</span><span class="p">:</span>
     <span class="n">thing</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;thing&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">thing</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">setting</span> <span class="o">=</span> <span class="n">get_user_setting</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">thing</span><span class="p">)</span>
@@ -151,8 +151,7 @@
         <span class="k">return</span> <span class="s2">&quot;Thing not specified&quot;</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">return</span> <span class="s2">&quot;No data posted&quot;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>What is good about the code above? It follows the thought process that most developers would have: which conditions must be met for me to execute the core logic of this feature? So I check each of those conditions and proceed if it is met. Then, in the middle of the code block, I have my core logic bundled up nicely. And at the end I deal with the cases where the conditions were not met.</p>
 <p>But are there any downsides?</p>
@@ -165,7 +164,7 @@
 </li>
 </ol>
 <p>Is there a better way? Yes, there is: the early exit. Instead of following the thought process of "Which conditions must be met?", we rather ask "Which conditions can I eliminate right off the bat?" Here's how we would rewrite the code above:</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">post_data</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="ow">not</span> <span class="n">post_data</span><span class="p">:</span>
     <span class="k">return</span> <span class="s2">&quot;No data posted&quot;</span>
 
 <span class="n">thing</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;thing&quot;</span><span class="p">)</span>
@@ -187,8 +186,7 @@
     <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
 
 <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">thing</span><span class="o">=</span><span class="n">thing</span><span class="p">)</span>        
-</pre></div>
-
+</code></pre></div>
 
 <p>For each condition that is not met, we return immediately, since no further processing is necessary. And then at the end we have our core logic bundled up again.</p>
 <p>This does a few things for us.</p>
