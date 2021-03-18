@@ -11,7 +11,7 @@ SITEURL = "https://www.helmut.dev"
 SITELOGO = "/images/me.jpg"
 
 PATH = "content"
-THEME = "Flex"
+THEME = "./themes/Flex"
 
 TIMEZONE = "Africa/Johannesburg"
 
