@@ -2,6 +2,8 @@ Title: Write better Django views
 Date: 2021-03-12 07:00
 Category: Better Django
 
+![image]({attach}/images/class-based.jpg)
+
 Should you use class-based views (CBV's) or function-based views (FBV's) in Django? It seems a lot of people are pushing CBV's, touting them to be the "standard" way of writing views in Django. But why do FBV's still exist then? Just for backward-compatibility? This is my highly opinionated "view" (see what I did there??) on this matter.
 
 The topic is hotly debated. Why are some people so passionate about CBV's? CBVs are said to be better because they abstract a lot of boiler-plate code into base classes and mixins. This is true. As a very basic example, instead of writing code to generate and return a rendered template, you can just use an existing base class for your view, and all you have to specify is the template name. And boom, Bob's your mother's cousin's uncle, twice removed. Seems like a no-brainer, right? We're saving at least 1-2 lines of code! (Yes, really)  
