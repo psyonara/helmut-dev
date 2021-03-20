@@ -113,6 +113,27 @@
 
 <article>
   <header>
+    <h2><a href="https://www.helmut.dev/write-better-django-views.html#write-better-django-views">Write better Django views</a></h2>
+    <p>
+      Posted on Fri 12 March 2021 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
+
+
+    </p>
+  </header>
+  <div>
+      <p><img alt="image" src="https://www.helmut.dev/class-based.jpg"></p>
+<p>Should you use class-based views (CBV's) or function-based views (FBV's) in Django? It seems a lot of people are pushing CBV's, touting them to be the "standard" way of writing views in Django. But why do FBV's still exist then? Just for backward-compatibility? This is my highly opinionated "view" (see what I did there??) on this matter.</p>
+<p>The topic is hotly debated. Why are some people so passionate about CBV's? CBVs are said to be better because they abstract a lot of boiler-plate code into base classes and mixins. This is true. As a very basic example, instead of writing …</p>
+        <br>
+        <a class="btn"
+           href="https://www.helmut.dev/write-better-django-views.html#write-better-django-views">
+          Continue reading
+        </a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="https://www.helmut.dev/learn-the-subtle-differences-between-save-and-update-in-django.html#learn-the-subtle-differences-between-save-and-update-in-django">Learn the subtle differences between Save and Update in Django</a></h2>
     <p>
       Posted on Fri 12 February 2021 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
@@ -173,14 +194,13 @@
   <div>
       <p><img alt="image" src="https://www.helmut.dev/bulk-exists-check.jpg"></p>
 <p>The <code>.exists()</code> function of Django's ORM is very useful. However, if you need to do this in bulk (think hundreds of thousands or more), this becomes a strain on your database. Let's say you are fetching records from an external system, and if the record doesn't exist locally, you need to do something:</p>
-<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">external_records</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">external_records</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">external_id</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="c1"># Do something</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>If you are working with a large quantity of records, this will flood your DB with queries. Instead, you could first pull all <code>external_id</code> values from the DB:</p>
-<div class="highlight"><pre><span></span><span class="n">existing_ids</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all …</span></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">existing_ids</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all …</span></code></pre></div>
         <br>
         <a class="btn"
            href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">
@@ -201,7 +221,7 @@
   <div>
       <p><img alt="Photo" src="https://www.helmut.dev/early-exit.jpg"></p>
 <p>You will have definitely come across the following pattern often:</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">post_data</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">post_data</span><span class="p">:</span>
     <span class="n">thing</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;thing&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">thing</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">setting</span> <span class="o">=</span> <span class="n">get_user_setting</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">thing</span><span class="p">)</span>
@@ -222,8 +242,7 @@
         <span class="k">return</span> <span class="s2">&quot;Thing not specified&quot;</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">return</span> <span class="s2">&quot;No data posted&quot;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>What is good about the code above? It follows the thought process that most developers would have: which conditions …</p>
         <br>
@@ -232,54 +251,12 @@
           Continue reading
         </a>
   </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://www.helmut.dev/faster-updating-of-dictionaries.html#faster-updating-of-dictionaries">Faster updating of dictionaries</a></h2>
-    <p>
-      Posted on Thu 09 July 2020 in <a href="https://www.helmut.dev/category/better-python.html">Better Python</a>
-
-
-    </p>
-  </header>
-  <div>
-      <p><img alt="Photo" src="https://www.helmut.dev/faster-updating-of-dictionaries.jpg"></p>
-<p>When updating a dictionary, no one would object to this:</p>
-<div class="highlight"><pre><span></span><span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Pete&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
-</pre></div>
-
-
-<p>But what about this?</p>
-<div class="highlight"><pre><span></span><span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Tom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">29</span>
-<span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Linda&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">37</span>
-<span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Pam&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">62</span>
-<span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Coraline&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">21</span>
-</pre></div>
-
-
-<p>Still fine, right? There is another way of writing this, using the <code>.update()</code> method.</p>
-<div class="highlight"><pre><span></span><span class="n">ages</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;Tom&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
-        <span class="s2">&quot;Linda&quot;</span><span class="p">:</span> <span class="mi">37</span><span class="p">,</span>
-        <span class="s2">&quot;Pam&quot;</span><span class="p">:</span> <span class="mi">62</span><span class="p">,</span>
-        <span class="s2">&quot;Coraline&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
-    <span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-
-
-<p>Which one do you prefer? Would you say it's a matter of preference? I always preferred using the <code>.update()</code> method when there were at least 3 updates being done. But one day I wondered about the performance of each method. Let's see if one is slower than …</p>
-        <br>
-        <a class="btn"
-           href="https://www.helmut.dev/faster-updating-of-dictionaries.html#faster-updating-of-dictionaries">
-          Continue reading
-        </a>
-  </div>
 </article>
 
   <div class="pagination">
+    <a class="btn float-left" href="https://www.helmut.dev/index2.html">
+      <i class="fa fa-angle-left"></i> Older Posts
+    </a>
   </div>
 
 

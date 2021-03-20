@@ -5,44 +5,51 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://www.helmut.dev/</loc>
-<lastmod>2021-02-12T07:00:36-00:00</lastmod>
+<lastmod>2021-03-19T22:46:21-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://www.helmut.dev/tags.html</loc>
-<lastmod>2021-02-12T07:00:36-00:00</lastmod>
+<lastmod>2021-03-19T22:46:21-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://www.helmut.dev/categories.html</loc>
-<lastmod>2021-02-12T07:00:36-00:00</lastmod>
+<lastmod>2021-03-19T22:46:21-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://www.helmut.dev/authors.html</loc>
-<lastmod>2021-02-12T07:00:36-00:00</lastmod>
+<lastmod>2021-03-19T22:46:21-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://www.helmut.dev/archives.html</loc>
-<lastmod>2021-02-12T07:00:36-00:00</lastmod>
+<lastmod>2021-03-19T22:46:21-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://www.helmut.dev/pages/about-me.html</loc>
-<lastmod>2021-02-12T07:00:36-00:00</lastmod>
+<lastmod>2021-03-19T22:46:21-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://www.helmut.dev/write-better-django-views.html</loc>
+<lastmod>2021-03-12T07:00:00+02:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
 </url>
 
 <url>
@@ -82,7 +89,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://www.helmut.dev/category/better-django.html</loc>
-<lastmod>2021-02-12T07:10:00+01:52</lastmod>
+<lastmod>2021-03-12T07:00:00+01:52</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
@@ -103,7 +110,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://www.helmut.dev/author/helmut-irle.html</loc>
-<lastmod>2021-02-12T07:10:00+01:52</lastmod>
+<lastmod>2021-03-12T07:00:00+01:52</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>

@@ -48,7 +48,7 @@
 <meta property="og:url" content="https://www.helmut.dev"/>
 <meta property="og:image" content="/images/me.jpg">
 
-  <title>Helmut.dev &ndash; Categories</title>
+  <title>Helmut.dev</title>
 
 </head>
 <body class="light-theme">
@@ -109,24 +109,57 @@
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    <h1 id="categories">Categories</h1>
+    <h2><a href="https://www.helmut.dev/faster-updating-of-dictionaries.html#faster-updating-of-dictionaries">Faster updating of dictionaries</a></h2>
+    <p>
+      Posted on Thu 09 July 2020 in <a href="https://www.helmut.dev/category/better-python.html">Better Python</a>
+
+
+    </p>
   </header>
   <div>
-    <ul class="list">
-      <li>
-        <a href="https://www.helmut.dev/category/better-django.html">Better Django</a> (3)
-      </li>
-      <li>
-        <a href="https://www.helmut.dev/category/better-python.html">Better Python</a> (2)
-      </li>
-      <li>
-        <a href="https://www.helmut.dev/category/misc.html">Misc</a> (1)
-      </li>
-    </ul>
+      <p><img alt="Photo" src="https://www.helmut.dev/faster-updating-of-dictionaries.jpg"></p>
+<p>When updating a dictionary, no one would object to this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Pete&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+</code></pre></div>
+
+<p>But what about this?</p>
+<div class="highlight"><pre><span></span><code><span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Tom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">29</span>
+<span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Linda&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">37</span>
+<span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Pam&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">62</span>
+<span class="n">ages</span><span class="p">[</span><span class="s2">&quot;Coraline&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">21</span>
+</code></pre></div>
+
+<p>Still fine, right? There is another way of writing this, using the <code>.update()</code> method.</p>
+<div class="highlight"><pre><span></span><code><span class="n">ages</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;Tom&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+        <span class="s2">&quot;Linda&quot;</span><span class="p">:</span> <span class="mi">37</span><span class="p">,</span>
+        <span class="s2">&quot;Pam&quot;</span><span class="p">:</span> <span class="mi">62</span><span class="p">,</span>
+        <span class="s2">&quot;Coraline&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Which one do you prefer? Would you say it's a matter of preference? I always preferred using the <code>.update()</code> method when there were at least 3 updates being done. But one day I wondered about the performance of each method. Let's see if one is slower than …</p>
+        <br>
+        <a class="btn"
+           href="https://www.helmut.dev/faster-updating-of-dictionaries.html#faster-updating-of-dictionaries">
+          Continue reading
+        </a>
   </div>
 </article>
+
+  <div class="pagination">
+    <a class="btn float-right" href="https://www.helmut.dev/index.html">
+      Newer Posts <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
 
     <footer>
 <p>&copy; Helmut.dev 2021</p>
