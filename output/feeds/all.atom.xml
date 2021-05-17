@@ -1,5 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Helmut.dev</title><link href="https://www.helmut.dev/" rel="alternate"></link><link href="https://www.helmut.dev/feeds/all.atom.xml" rel="self"></link><id>https://www.helmut.dev/</id><updated>2021-03-12T07:00:00+02:00</updated><subtitle>Better code</subtitle><entry><title>Write better Django views</title><link href="https://www.helmut.dev/write-better-django-views.html" rel="alternate"></link><published>2021-03-12T07:00:00+02:00</published><updated>2021-03-12T07:00:00+02:00</updated><author><name>Helmut Irle</name></author><id>tag:www.helmut.dev,2021-03-12:/write-better-django-views.html</id><summary type="html">&lt;p&gt;&lt;img alt="image" src="https://www.helmut.dev/class-based.jpg"&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Helmut.dev</title><link href="https://www.helmut.dev/" rel="alternate"></link><link href="https://www.helmut.dev/feeds/all.atom.xml" rel="self"></link><id>https://www.helmut.dev/</id><updated>2021-05-17T22:00:00+02:00</updated><subtitle>Better code</subtitle><entry><title>Using Exceptions instead of Dynamic Typing</title><link href="https://www.helmut.dev/using-exceptions-instead-of-dynamic-typing.html" rel="alternate"></link><published>2021-05-17T22:00:00+02:00</published><updated>2021-05-17T22:00:00+02:00</updated><author><name>Helmut Irle</name></author><id>tag:www.helmut.dev,2021-05-17:/using-exceptions-instead-of-dynamic-typing.html</id><summary type="html">&lt;p&gt;&lt;img alt="Photo" src="https://www.helmut.dev/using-exceptions-instead-of-dynamic-types.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Python's dynamic typing is great, right? You can just do whatever you want with variables. FREEDOM! ;-) This comes at a price though, and sometimes one we're not always aware of.&lt;/p&gt;
+&lt;h3&gt;Trying not to fail&lt;/h3&gt;
+&lt;p&gt;For years I took advantage of Python's dynamic typing by having functions return an error state via a different data type. For example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int_input&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int_input&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;An integer must be provided&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;int_input&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And consuming this function would have looked like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;doubled_int&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;doubled_int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;You did not provide an integer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="Photo" src="https://www.helmut.dev/using-exceptions-instead-of-dynamic-types.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Python's dynamic typing is great, right? You can just do whatever you want with variables. FREEDOM! ;-) This comes at a price though, and sometimes one we're not always aware of.&lt;/p&gt;
+&lt;h3&gt;Trying not to fail&lt;/h3&gt;
+&lt;p&gt;For years I took advantage of Python's dynamic typing by having functions return an error state via a different data type. For example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int_input&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int_input&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;An integer must be provided&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;int_input&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And consuming this function would have looked like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;doubled_int&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;doubled_int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;You did not provide an integer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Your doubled value: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;doubled_int&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Seems kind of legit. Performance wise there shouldn't be any problems, right?&lt;/p&gt;
+&lt;p&gt;But what we're ignoring here is maintainability. This is an over-simplified example, but if you have longer functions with multiple return statements, and you're using more than just one data type to signify different things, this can quickly become a problem.&lt;/p&gt;
+&lt;p&gt;If another developer has to use or modify this function somewhere down the line, it becomes more work to understand what the function is returning in which cases. They will need to read through the function in order to know which return types to expect, and what they mean.&lt;/p&gt;
+&lt;h3&gt;The Catch&lt;/h3&gt;
+&lt;p&gt;Can we improve on this? Can we make it easier for that developer to use or modify that function? I think there is a way, and that is using exceptions.&lt;/p&gt;
+&lt;p&gt;Exceptions are a built-in part of Python, and for some reason, over the years, I made a habit of trying to avoid raising of exceptions. But in this case they can serve us pretty well. Our goal is to have a function that has a consistent return data type. And any problems are caught by said exceptions. If we now refactor the function above, we get this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int_input&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;int_input&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;An integer must be provided.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;int_input&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Simple, right? Instead of returning a string, we just raise an exception. So far we haven't complicated anything, but the benefit will become apparent in the next step. We are now going to consume this refactored function and catch the exception.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;doubled_int&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Your doubled value: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;doubled_int&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;You did not provide an integer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Finally&lt;/h3&gt;
+&lt;p&gt;So, what exactly happened? We use a try/catch block to catch this new exception that we raised. If everything goes well, our integer is doubled and printed to the screen. However, if we provided a wrong value, the exception is caught and we print an error to the screen.&lt;/p&gt;
+&lt;p&gt;Have we gained anything? It has come at the cost of an extra line of code, but I think it's clear that we have gained in readability. For any Python developer it is now immediately clear that this function might result in an error, and it's also clear what happens in that case.&lt;/p&gt;
+&lt;p&gt;Maintainability has also improved. Any future consumer of this function doesn't need to wonder about the different return types that they could/should be expecting. And if the function is modified, one can now just raise other exceptions if new error cases are added. Again, the return type stays consistent.&lt;/p&gt;</content><category term="Better Python"></category></entry><entry><title>Write better Django views</title><link href="https://www.helmut.dev/write-better-django-views.html" rel="alternate"></link><published>2021-03-12T07:00:00+02:00</published><updated>2021-03-12T07:00:00+02:00</updated><author><name>Helmut Irle</name></author><id>tag:www.helmut.dev,2021-03-12:/write-better-django-views.html</id><summary type="html">&lt;p&gt;&lt;img alt="image" src="https://www.helmut.dev/class-based.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Should you use class-based views (CBV's) or function-based views (FBV's) in Django? It seems a lot of people are pushing CBV's, touting them to be the "standard" way of writing views in Django. But why do FBV's still exist then? Just for backward-compatibility? This is my highly opinionated "view" (see what I did there??) on this matter.&lt;/p&gt;
 &lt;p&gt;The topic is hotly debated. Why are some people so passionate about CBV's? CBVs are said to be better because they abstract a lot of boiler-plate code into base classes and mixins. This is true. As a very basic example, instead of writing …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="image" src="https://www.helmut.dev/class-based.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Should you use class-based views (CBV's) or function-based views (FBV's) in Django? It seems a lot of people are pushing CBV's, touting them to be the "standard" way of writing views in Django. But why do FBV's still exist then? Just for backward-compatibility? This is my highly opinionated "view" (see what I did there??) on this matter.&lt;/p&gt;

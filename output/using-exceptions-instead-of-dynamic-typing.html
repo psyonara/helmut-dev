@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://www.helmut.dev/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://www.helmut.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Helmut.dev Atom">
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-172353205-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Helmut Irle" />
+<meta name="description" content="Python&#39;s dynamic typing is great, right? You can just do whatever you want with variables. FREEDOM! ;-) This comes at a price though, and sometimes one we&#39;re not always aware of. Trying not to fail For years I took advantage of Python&#39;s dynamic typing by having functions return an error state via a different data type. For example: def double(int_input): if not isinstance(int_input, int): return &#34;An integer must be provided&#34; return int_input * 2 And consuming this function would have looked like this: doubled_int = double(user_input) if isinstance(doubled_int, str): print(&#34;You did not provide an integer&#34;) return print(f …" />
+<meta name="keywords" content="">
+
+
+<meta property="og:site_name" content="Helmut.dev"/>
+<meta property="og:title" content="Using Exceptions instead of Dynamic Typing"/>
+<meta property="og:description" content="Python&#39;s dynamic typing is great, right? You can just do whatever you want with variables. FREEDOM! ;-) This comes at a price though, and sometimes one we&#39;re not always aware of. Trying not to fail For years I took advantage of Python&#39;s dynamic typing by having functions return an error state via a different data type. For example: def double(int_input): if not isinstance(int_input, int): return &#34;An integer must be provided&#34; return int_input * 2 And consuming this function would have looked like this: doubled_int = double(user_input) if isinstance(doubled_int, str): print(&#34;You did not provide an integer&#34;) return print(f …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://www.helmut.dev/using-exceptions-instead-of-dynamic-typing.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-05-17 22:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://www.helmut.dev/author/helmut-irle.html">
+<meta property="article:section" content="Better Python"/>
+<meta property="og:image" content="/images/me.jpg">
+
+  <title>Helmut.dev &ndash; Using Exceptions instead of Dynamic Typing</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="https://www.helmut.dev">
+        <img src="/images/me.jpg" alt="Helmut.dev" title="Helmut.dev">
+      </a>
+
+      <h1>
+        <a href="https://www.helmut.dev">Helmut.dev</a>
+      </h1>
+
+<p>Better code</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="https://www.helmut.dev/pages/about-me.html#about-me">
+                  About Me
+                </a>
+              </li>
+
+            <li>
+              <a target="_self" href="https://sequelsermon.com" >Sequel Sermon</a>
+            </li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://www.github.com/psyonara" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://www.twitter.com/psyonara" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://www.helmut.dev">Home</a>
+
+      <a href="/category/better-python.html">Better Python</a>
+      <a href="/category/better-django.html">Better Django</a>
+      <a href="/category/misc.html">Misc</a>
+
+      <a href="https://www.helmut.dev/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="using-exceptions-instead-of-dynamic-typing">Using Exceptions instead of Dynamic Typing</h1>
+    <p>
+      Posted on Mon 17 May 2021 in <a href="https://www.helmut.dev/category/better-python.html">Better Python</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p><img alt="Photo" src="https://www.helmut.dev/using-exceptions-instead-of-dynamic-types.jpg"></p>
+<p>Python's dynamic typing is great, right? You can just do whatever you want with variables. FREEDOM! ;-) This comes at a price though, and sometimes one we're not always aware of.</p>
+<h3>Trying not to fail</h3>
+<p>For years I took advantage of Python's dynamic typing by having functions return an error state via a different data type. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">double</span><span class="p">(</span><span class="n">int_input</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">int_input</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;An integer must be provided&quot;</span>
+
+    <span class="k">return</span> <span class="n">int_input</span> <span class="o">*</span> <span class="mi">2</span>
+</code></pre></div>
+
+<p>And consuming this function would have looked like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">doubled_int</span> <span class="o">=</span> <span class="n">double</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">doubled_int</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You did not provide an integer&quot;</span><span class="p">)</span>
+    <span class="k">return</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Your doubled value: </span><span class="si">{</span><span class="n">doubled_int</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Seems kind of legit. Performance wise there shouldn't be any problems, right?</p>
+<p>But what we're ignoring here is maintainability. This is an over-simplified example, but if you have longer functions with multiple return statements, and you're using more than just one data type to signify different things, this can quickly become a problem.</p>
+<p>If another developer has to use or modify this function somewhere down the line, it becomes more work to understand what the function is returning in which cases. They will need to read through the function in order to know which return types to expect, and what they mean.</p>
+<h3>The Catch</h3>
+<p>Can we improve on this? Can we make it easier for that developer to use or modify that function? I think there is a way, and that is using exceptions.</p>
+<p>Exceptions are a built-in part of Python, and for some reason, over the years, I made a habit of trying to avoid raising of exceptions. But in this case they can serve us pretty well. Our goal is to have a function that has a consistent return data type. And any problems are caught by said exceptions. If we now refactor the function above, we get this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">double</span><span class="p">(</span><span class="n">int_input</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">int_input</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;An integer must be provided.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">int_input</span> <span class="o">*</span> <span class="mi">2</span>
+</code></pre></div>
+
+<p>Simple, right? Instead of returning a string, we just raise an exception. So far we haven't complicated anything, but the benefit will become apparent in the next step. We are now going to consume this refactored function and catch the exception.</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="n">doubled_int</span> <span class="o">=</span> <span class="n">double</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Your doubled value: </span><span class="si">{</span><span class="n">doubled_int</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You did not provide an integer&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>Finally</h3>
+<p>So, what exactly happened? We use a try/catch block to catch this new exception that we raised. If everything goes well, our integer is doubled and printed to the screen. However, if we provided a wrong value, the exception is caught and we print an error to the screen.</p>
+<p>Have we gained anything? It has come at the cost of an extra line of code, but I think it's clear that we have gained in readability. For any Python developer it is now immediately clear that this function might result in an error, and it's also clear what happens in that case.</p>
+<p>Maintainability has also improved. Any future consumer of this function doesn't need to wonder about the different return types that they could/should be expecting. And if the function is modified, one can now just raise other exceptions if new error cases are added. Again, the return type stays consistent.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Helmut.dev 2021</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Helmut.dev ",
+  "url" : "https://www.helmut.dev",
+  "image": "/images/me.jpg",
+  "description": ""
+}
+</script>
+
+
+</body>
+</html>

@@ -113,6 +113,42 @@
 
 <article>
   <header>
+    <h2><a href="https://www.helmut.dev/using-exceptions-instead-of-dynamic-typing.html#using-exceptions-instead-of-dynamic-typing">Using Exceptions instead of Dynamic Typing</a></h2>
+    <p>
+      Posted on Mon 17 May 2021 in <a href="https://www.helmut.dev/category/better-python.html">Better Python</a>
+
+
+    </p>
+  </header>
+  <div>
+      <p><img alt="Photo" src="https://www.helmut.dev/using-exceptions-instead-of-dynamic-types.jpg"></p>
+<p>Python's dynamic typing is great, right? You can just do whatever you want with variables. FREEDOM! ;-) This comes at a price though, and sometimes one we're not always aware of.</p>
+<h3>Trying not to fail</h3>
+<p>For years I took advantage of Python's dynamic typing by having functions return an error state via a different data type. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">double</span><span class="p">(</span><span class="n">int_input</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">int_input</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;An integer must be provided&quot;</span>
+
+    <span class="k">return</span> <span class="n">int_input</span> <span class="o">*</span> <span class="mi">2</span>
+</code></pre></div>
+
+<p>And consuming this function would have looked like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">doubled_int</span> <span class="o">=</span> <span class="n">double</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">doubled_int</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You did not provide an integer&quot;</span><span class="p">)</span>
+    <span class="k">return</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f …</span></code></pre></div>
+        <br>
+        <a class="btn"
+           href="https://www.helmut.dev/using-exceptions-instead-of-dynamic-typing.html#using-exceptions-instead-of-dynamic-typing">
+          Continue reading
+        </a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="https://www.helmut.dev/write-better-django-views.html#write-better-django-views">Write better Django views</a></h2>
     <p>
       Posted on Fri 12 March 2021 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
@@ -204,50 +240,6 @@
         <br>
         <a class="btn"
            href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">
-          Continue reading
-        </a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://www.helmut.dev/early-exit.html#early-exit">Early Exit</a></h2>
-    <p>
-      Posted on Sun 12 July 2020 in <a href="https://www.helmut.dev/category/better-python.html">Better Python</a>
-
-
-    </p>
-  </header>
-  <div>
-      <p><img alt="Photo" src="https://www.helmut.dev/early-exit.jpg"></p>
-<p>You will have definitely come across the following pattern often:</p>
-<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">post_data</span><span class="p">:</span>
-    <span class="n">thing</span> <span class="o">=</span> <span class="n">post_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;thing&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">thing</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">setting</span> <span class="o">=</span> <span class="n">get_user_setting</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">thing</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">setting</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">permission</span> <span class="o">=</span> <span class="n">get_user_permission</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">permission</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_superuser</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-                <span class="k">elif</span> <span class="n">user</span><span class="o">.</span><span class="n">is_staff</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">DataPoint</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">thing</span><span class="o">=</span><span class="n">thing</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="s2">&quot;Permission denied&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;Setting not found&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;Thing not specified&quot;</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">return</span> <span class="s2">&quot;No data posted&quot;</span>
-</code></pre></div>
-
-<p>What is good about the code above? It follows the thought process that most developers would have: which conditions …</p>
-        <br>
-        <a class="btn"
-           href="https://www.helmut.dev/early-exit.html#early-exit">
           Continue reading
         </a>
   </div>
