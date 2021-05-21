@@ -113,6 +113,45 @@
 
 <article>
   <header>
+    <h2><a href="https://www.helmut.dev/understanding-the-difference-between-get-and-first-in-django.html#understanding-the-difference-between-get-and-first-in-django">Understanding the difference between .get and .first in Django</a></h2>
+    <p>
+      Posted on Fri 21 May 2021 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
+
+
+    </p>
+  </header>
+  <div>
+      <p><img alt="Photo" src="https://www.helmut.dev/get-vs-first.jpg"></p>
+<p>When retrieving a single record in Django, the ORM offers two possible methods: <code>.get()</code> and <code>.first()</code>. Let's learn how each one works and when to use them.</p>
+<h4>Get</h4>
+<p>Django's most basic way to retrieve a single record is <a href="[QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.2/ref/models/querysets/#get)">the .get() method</a>. It is used as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="n">burger</span> <span class="o">=</span> <span class="n">Menu</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Beef Burger&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Quick facts about <code>.get()</code>:</p>
+<ul>
+<li>
+<p>It retrieves only one record.</p>
+</li>
+<li>
+<p>If no record exists that meets the given criteria, it raises a <code>DoesNotExist</code> exception.</p>
+</li>
+<li>
+<p>If more than one record with the given criteria exists, it raises a <code>MultipleObjectsReturned</code> exception.</p>
+</li>
+</ul>
+<h3>First</h3>
+<p>A different way to get one record is …</p>
+        <br>
+        <a class="btn"
+           href="https://www.helmut.dev/understanding-the-difference-between-get-and-first-in-django.html#understanding-the-difference-between-get-and-first-in-django">
+          Continue reading
+        </a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="https://www.helmut.dev/using-exceptions-instead-of-dynamic-typing.html#using-exceptions-instead-of-dynamic-typing">Using Exceptions instead of Dynamic Typing</a></h2>
     <p>
       Posted on Mon 17 May 2021 in <a href="https://www.helmut.dev/category/better-python.html">Better Python</a>
@@ -213,33 +252,6 @@
         <br>
         <a class="btn"
            href="https://www.helmut.dev/results-vs-code-vs-pycharm.html#results-vs-code-vs-pycharm">
-          Continue reading
-        </a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">Speed up bulk-exists check with python sets</a></h2>
-    <p>
-      Posted on Sat 01 August 2020 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
-
-
-    </p>
-  </header>
-  <div>
-      <p><img alt="image" src="https://www.helmut.dev/bulk-exists-check.jpg"></p>
-<p>The <code>.exists()</code> function of Django's ORM is very useful. However, if you need to do this in bulk (think hundreds of thousands or more), this becomes a strain on your database. Let's say you are fetching records from an external system, and if the record doesn't exist locally, you need to do something:</p>
-<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">external_records</span><span class="p">:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">external_id</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-        <span class="c1"># Do something</span>
-</code></pre></div>
-
-<p>If you are working with a large quantity of records, this will flood your DB with queries. Instead, you could first pull all <code>external_id</code> values from the DB:</p>
-<div class="highlight"><pre><span></span><code><span class="n">existing_ids</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all …</span></code></pre></div>
-        <br>
-        <a class="btn"
-           href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">
           Continue reading
         </a>
   </div>
