@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://www.helmut.dev/theme/pygments/monokai.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://www.helmut.dev/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://www.helmut.dev/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Helmut.dev Atom">
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-172353205-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Helmut Irle" />
+<meta name="description" content="When retrieving a single record in Django, the ORM offers two possible methods: .get() and .first(). Let&#39;s learn how each one works and when to use them. Get Django&#39;s most basic way to retrieve a single record is the .get() method. It is used as follows: burger = Menu.objects.get(name=&#34;Beef Burger&#34;) Quick facts about .get(): It retrieves only one record. If no record exists that meets the given criteria, it raises a DoesNotExist exception. If more than one record with the given criteria exists, it raises a MultipleObjectsReturned exception. First A different way to get one record is …" />
+<meta name="keywords" content="">
+
+
+<meta property="og:site_name" content="Helmut.dev"/>
+<meta property="og:title" content="Understanding the difference between .get and .first in Django"/>
+<meta property="og:description" content="When retrieving a single record in Django, the ORM offers two possible methods: .get() and .first(). Let&#39;s learn how each one works and when to use them. Get Django&#39;s most basic way to retrieve a single record is the .get() method. It is used as follows: burger = Menu.objects.get(name=&#34;Beef Burger&#34;) Quick facts about .get(): It retrieves only one record. If no record exists that meets the given criteria, it raises a DoesNotExist exception. If more than one record with the given criteria exists, it raises a MultipleObjectsReturned exception. First A different way to get one record is …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://www.helmut.dev/understanding-the-difference-between-get-and-first-in-django.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-05-21 07:30:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://www.helmut.dev/author/helmut-irle.html">
+<meta property="article:section" content="Better Django"/>
+<meta property="og:image" content="/images/me.jpg">
+
+  <title>Helmut.dev &ndash; Understanding the difference between .get and .first in Django</title>
+
+</head>
+<body class="light-theme">
+  <aside>
+    <div>
+      <a href="https://www.helmut.dev">
+        <img src="/images/me.jpg" alt="Helmut.dev" title="Helmut.dev">
+      </a>
+
+      <h1>
+        <a href="https://www.helmut.dev">Helmut.dev</a>
+      </h1>
+
+<p>Better code</p>
+
+      <nav>
+        <ul class="list">
+
+
+              <li>
+                <a target="_self"
+                   href="https://www.helmut.dev/pages/about-me.html#about-me">
+                  About Me
+                </a>
+              </li>
+
+            <li>
+              <a target="_self" href="https://sequelsermon.com" >Sequel Sermon</a>
+            </li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-github" href="https://www.github.com/psyonara" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-twitter" href="https://www.twitter.com/psyonara" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://www.helmut.dev">Home</a>
+
+      <a href="/category/better-python.html">Better Python</a>
+      <a href="/category/better-django.html">Better Django</a>
+      <a href="/category/misc.html">Misc</a>
+
+      <a href="https://www.helmut.dev/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="understanding-the-difference-between-get-and-first-in-django">Understanding the difference between .get and .first in Django</h1>
+    <p>
+      Posted on Fri 21 May 2021 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p><img alt="Photo" src="https://www.helmut.dev/get-vs-first.jpg"></p>
+<p>When retrieving a single record in Django, the ORM offers two possible methods: <code>.get()</code> and <code>.first()</code>. Let's learn how each one works and when to use them.</p>
+<h4>Get</h4>
+<p>Django's most basic way to retrieve a single record is <a href="[QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.2/ref/models/querysets/#get)">the .get() method</a>. It is used as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="n">burger</span> <span class="o">=</span> <span class="n">Menu</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Beef Burger&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Quick facts about <code>.get()</code>:</p>
+<ul>
+<li>
+<p>It retrieves only one record.</p>
+</li>
+<li>
+<p>If no record exists that meets the given criteria, it raises a <code>DoesNotExist</code> exception.</p>
+</li>
+<li>
+<p>If more than one record with the given criteria exists, it raises a <code>MultipleObjectsReturned</code> exception.</p>
+</li>
+</ul>
+<h3>First</h3>
+<p>A different way to get one record is to use <a href="[QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.2/ref/models/querysets/#first)">.first()</a> on a QuerySet. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">burger</span> <span class="o">=</span> <span class="n">Menu</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Beef Burger&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Quick facts about <code>.first()</code>:</p>
+<ul>
+<li>
+<p>It will return the first item of a recordset.</p>
+</li>
+<li>
+<p>If no record exists, it returns <code>None</code>.</p>
+</li>
+</ul>
+<h3>Handling unexpected situations</h3>
+<h4>Get</h4>
+<p>If Django's ORM can't return one record (i.e. there is either no record, or there are more than one), you have to catch the relevant exception. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Menu</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Beef Burger&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">Menu</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Could not find a burger&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">Menu</span><span class="o">.</span><span class="n">MultipleObjectsReturned</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Found too many burgers&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>First</h4>
+<p>When using <code>.first()</code>, the only unexpected situation is if no record was present in the QuerySet. Since it's not a problem if multiple records exist that meet the criteria, we have to deal only with the one case. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">burger</span> <span class="o">=</span> <span class="n">Menu</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Beef Burger&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">burger</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Could not find a burger&quot;</span><span class="p">)</span>
+
+<span class="k">return</span> <span class="n">burger</span>
+</code></pre></div>
+
+<h3>Subtle differences</h3>
+<p>Did you notice the differences between the two above? For <code>.get()</code> we have to deal with more "error" scenarios. But why is that? The <code>.get()</code> method expects no more and no less than one record to be returned, whereas <code>.first()</code> assumes there might be multiple records, and it returns the first. So we have a fundamental difference in the assumptions each of these makes.</p>
+<p>Should we care? Does it really make a difference which of the two methods we use if we get the same result?</p>
+<p>I used to think it didn't matter, but I was wrong.</p>
+<ol>
+<li>
+<p>Using <code>.get()</code> might point to a problem with our Model that we are unaware of. If we are expecting only one record to be returned, but we get back multiple, we have failed to make sure that one of the fields (or multiple ones) enforce a <a href="[Model field reference | Django documentation | Django](https://docs.djangoproject.com/en/3.2/ref/models/fields/#django.db.models.Field.unique)">unique constraint</a>. Handling this at a database layer is crucial. If we had used <code>.first()</code>, and had not added a unique constraint, we might have never noticed if there were multiple records where we are expecting only one.</p>
+</li>
+<li>
+<p>What about readability? I never thought about how the code reads in each case, and what it tells the reader about the data models. When you use <code>.get()</code>, the reader will (or should) know immediately that the record should be unique for the fields you filtered on. However, if you use <code>.first()</code>, it implies to the reader that multiple records might exist, but you only care about the first one.</p>
+</li>
+</ol>
+<h3>When to use which</h3>
+<h4>Get</h4>
+<p>Use <code>.get()</code> when you are expecting only one (or a maximum of one) record to be returned. The code makes your intentions clear, and there's less room for undetected errors.</p>
+<h4>First</h4>
+<p>Use <code>.first()</code> when you know there might be multiple records (and that's ok), but you only care about the first. In most cases you should also have some <a href="[QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.2/ref/models/querysets/#django.db.models.query.QuerySet.order_by)">order</a> defined <a href="[Model Meta options | Django documentation | Django](https://docs.djangoproject.com/en/3.2/ref/models/options/#ordering)">on the model</a> (or specified <a href="[QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.2/ref/models/querysets/#django.db.models.query.QuerySet.order_by)">on your query</a>), otherwise the first record might be random. In some cases you might not even care about the order, but just be aware of it. </p>
+<h3>Gotchas</h3>
+<ul>
+<li>
+<p>If you use <code>.first()</code>, you run the risk of using the <code>None</code> (in the case of no record found) as a different return data type to signify the fact that nothing was found. It's not very likely, but I've caught myself doing this. I wrote about that trap <a href="https://www.helmut.dev/using-exceptions-instead-of-dynamic-typing.html">here</a>.</p>
+</li>
+<li>
+<p>The SQL query generated by <code>.get()</code> does not have a limit. So if you have multiple records, before the <code>MultipleObjectsReturned</code> exception is raised, your database will return all the records matching that criteria. But using <code>.first()</code> adds a <code>LIMIT 1</code> to your query, so it will only ever return one record. Be careful which one you choose.</p>
+</li>
+</ul>
+<h3>Summary</h3>
+<p>If you query the database and only ever expect one record (maximum) to be returned, don't use <code>.first()</code>, but rather <code>.get()</code> instead. You'll thank yourself later.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Helmut.dev 2021</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Helmut.dev ",
+  "url" : "https://www.helmut.dev",
+  "image": "/images/me.jpg",
+  "description": ""
+}
+</script>
+
+
+</body>
+</html>
