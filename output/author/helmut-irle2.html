@@ -113,6 +113,33 @@
 
 <article>
   <header>
+    <h2><a href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">Speed up bulk-exists check with python sets</a></h2>
+    <p>
+      Posted on Sat 01 August 2020 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
+
+
+    </p>
+  </header>
+  <div>
+      <p><img alt="image" src="https://www.helmut.dev/bulk-exists-check.jpg"></p>
+<p>The <code>.exists()</code> function of Django's ORM is very useful. However, if you need to do this in bulk (think hundreds of thousands or more), this becomes a strain on your database. Let's say you are fetching records from an external system, and if the record doesn't exist locally, you need to do something:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">external_records</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">external_id</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="c1"># Do something</span>
+</code></pre></div>
+
+<p>If you are working with a large quantity of records, this will flood your DB with queries. Instead, you could first pull all <code>external_id</code> values from the DB:</p>
+<div class="highlight"><pre><span></span><code><span class="n">existing_ids</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all …</span></code></pre></div>
+        <br>
+        <a class="btn"
+           href="https://www.helmut.dev/speed-up-bulk-exists-check-with-python-sets.html#speed-up-bulk-exists-check-with-python-sets">
+          Continue reading
+        </a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="https://www.helmut.dev/early-exit.html#early-exit">Early Exit</a></h2>
     <p>
       Posted on Sun 12 July 2020 in <a href="https://www.helmut.dev/category/better-python.html">Better Python</a>

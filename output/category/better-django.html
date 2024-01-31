@@ -113,6 +113,45 @@
 
 <article>
   <header>
+    <h2><a href="https://www.helmut.dev/understanding-the-difference-between-get-and-first-in-django.html#understanding-the-difference-between-get-and-first-in-django">Understanding the difference between .get and .first in Django</a></h2>
+    <p>
+      Posted on Fri 21 May 2021 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
+
+
+    </p>
+  </header>
+  <div>
+      <p><img alt="Photo" src="https://www.helmut.dev/get-vs-first.jpg"></p>
+<p>When retrieving a single record in Django, the ORM offers two possible methods: <code>.get()</code> and <code>.first()</code>. Let's learn how each one works and when to use them.</p>
+<h4>Get</h4>
+<p>Django's most basic way to retrieve a single record is <a href="[QuerySet API reference | Django documentation | Django](https://docs.djangoproject.com/en/3.2/ref/models/querysets/#get)">the .get() method</a>. It is used as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="n">burger</span> <span class="o">=</span> <span class="n">Menu</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Beef Burger&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Quick facts about <code>.get()</code>:</p>
+<ul>
+<li>
+<p>It retrieves only one record.</p>
+</li>
+<li>
+<p>If no record exists that meets the given criteria, it raises a <code>DoesNotExist</code> exception.</p>
+</li>
+<li>
+<p>If more than one record with the given criteria exists, it raises a <code>MultipleObjectsReturned</code> exception.</p>
+</li>
+</ul>
+<h3>First</h3>
+<p>A different way to get one record is …</p>
+        <br>
+        <a class="btn"
+           href="https://www.helmut.dev/understanding-the-difference-between-get-and-first-in-django.html#understanding-the-difference-between-get-and-first-in-django">
+          Continue reading
+        </a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="https://www.helmut.dev/write-better-django-views.html#write-better-django-views">Write better Django views</a></h2>
     <p>
       Posted on Fri 12 March 2021 in <a href="https://www.helmut.dev/category/better-django.html">Better Django</a>
