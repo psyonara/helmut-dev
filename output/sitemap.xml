@@ -5,42 +5,42 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://www.helmut.dev/</loc>
-<lastmod>2021-05-21T07:23:40-00:00</lastmod>
+<lastmod>2024-01-31T21:16:37-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://www.helmut.dev/tags.html</loc>
-<lastmod>2021-05-21T07:23:40-00:00</lastmod>
+<lastmod>2024-01-31T21:16:37-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://www.helmut.dev/categories.html</loc>
-<lastmod>2021-05-21T07:23:40-00:00</lastmod>
+<lastmod>2024-01-31T21:16:37-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://www.helmut.dev/authors.html</loc>
-<lastmod>2021-05-21T07:23:40-00:00</lastmod>
+<lastmod>2024-01-31T21:16:37-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://www.helmut.dev/archives.html</loc>
-<lastmod>2021-05-21T07:23:40-00:00</lastmod>
+<lastmod>2024-01-31T21:16:37-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.6</priority>
 </url>
 
 <url>
 <loc>https://www.helmut.dev/pages/about-me.html</loc>
-<lastmod>2021-05-21T07:23:40-00:00</lastmod>
+<lastmod>2024-01-31T21:16:37-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
